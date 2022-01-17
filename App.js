@@ -35,7 +35,7 @@ export default function App() {
       <Drawer.Navigator initialRouteName="Home">
       <Drawer.Screen name="Főoldal" component={Fooldallap} />
         <Drawer.Screen name="Anime" component={Animelap} />
-        <Drawer.Screen name="Kereses" component={Kereseslap} />
+        <Drawer.Screen name="Anime keresés" component={Kereseslap} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

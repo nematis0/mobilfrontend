@@ -4,17 +4,18 @@ import { View, Text, StyleSheet, TouchableOpacity, Image,  Modal, FlatList} from
 export default class Anime extends Component {
   constructor(props) {
     super(props);
-    this.state = {text: '', isVisible: false,animedata:[],dataSource:[]};
+    this.state = {text: '',akttema:1, isVisible: false,animedata:[],dataSource:[], dataSource2:[]};
   }
 
   componentDidMount(){
-    return fetch('http://192.168.1.112:3000/Animek')
+    return fetch('http://192.168.2.118:3000/Animek')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
           isLoading: false,
           dataSource: responseJson,
           animedata: [],
+          dataSource2: responseJson,
   
         }, function(){
 
@@ -30,9 +31,156 @@ export default class Anime extends Component {
     this.setState({isVisible: show})
   }
 
+  kereses=async ()=>{
+    alert("helo")
+    let bemenet={
+      bevitel1:"Action, Adventure, Comedy, Drama, Fantasy, Horror, Mystery, Romance, Sci-Fi, Slice of Life, Sports, Supernatural"
+    }
+
+    return fetch('http://192.168.2.118:3000/tipusok',{
+      method: "POST",
+      body: JSON.stringify(bemenet),
+      headers: {"Content-type": "application/json; charset=UTF-8"}
+    }
+       
+    )
+    .then((response) => response.json())
+    .then((responseJson) => {
+
+      this.setState({
+        isLoading: false,
+        dataSource2: responseJson,
+      }, function(){
+
+        alert(JSON.stringify(this.state.dataSource2))
+      });
+
+    })
+    .catch((error) =>{
+      console.error(error);
+    });
+  }
+
+  hivas=async (szam)=>{
+  //alert(szam)
+    this.setState({akttema:szam})
+
+    let bemenet={
+      bevitel1:szam
+    }
+
+    return fetch('http://192.168.2.118:3000/animekomment',{
+      method: "POST",
+      body: JSON.stringify(bemenet),
+      headers: {"Content-type": "application/json; charset=UTF-8"}
+    }
+       
+    )
+    .then((response) => response.json())
+    .then((responseJson) => {
+
+      this.setState({
+        isLoading: false,
+        dataSource2: responseJson,
+      }, function(){
+
+        //alert(JSON.stringify(this.state.dataSource2))
+      });
+
+    })
+    .catch((error) =>{
+      console.error(error);
+    });
+  }
+
   render() {
     return (
       <View style = { styles.container }>
+
+          <TouchableOpacity style={{padding:10}}
+          onPress={async ()=>this.kereses()}>
+          <View style={styles.gomb}>
+          <Text style={styles.gombSzoveg}>Action</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{padding:10}}
+          onPress={async ()=>this.kereses()}>
+          <View style={styles.gomb}>
+          <Text style={styles.gombSzoveg}>Adventure</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{padding:10}}
+          onPress={async ()=>this.kereses()}>
+          <View style={styles.gomb}>
+          <Text style={styles.gombSzoveg}>Comedy</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{padding:10}}
+          onPress={async ()=>this.kereses()}>
+          <View style={styles.gomb}>
+          <Text style={styles.gombSzoveg}>Drama</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{padding:10}}
+          onPress={async ()=>this.kereses()}>
+          <View style={styles.gomb}>
+          <Text style={styles.gombSzoveg}>Fantasy</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{padding:10}}
+          onPress={async ()=>this.kereses()}>
+          <View style={styles.gomb}>
+          <Text style={styles.gombSzoveg}>Horror</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{padding:10}}
+          onPress={async ()=>this.kereses()}>
+          <View style={styles.gomb}>
+          <Text style={styles.gombSzoveg}>Mystery</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{padding:10}}
+          onPress={async ()=>this.kereses()}>
+          <View style={styles.gomb}>
+          <Text style={styles.gombSzoveg}>Romance</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{padding:10}}
+          onPress={async ()=>this.kereses()}>
+          <View style={styles.gomb}>
+          <Text style={styles.gombSzoveg}>Sci-Fi</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{padding:10}}
+          onPress={async ()=>this.kereses()}>
+          <View style={styles.gomb}>
+          <Text style={styles.gombSzoveg}>Slice of Life</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{padding:10}}
+          onPress={async ()=>this.kereses()}>
+          <View style={styles.gomb}>
+          <Text style={styles.gombSzoveg}>Sports</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{padding:10}}
+          onPress={async ()=>this.kereses()}>
+          <View style={styles.gomb}>
+          <Text style={styles.gombSzoveg}>Supernatural</Text>
+          </View>
+          </TouchableOpacity>
+
 
         <Modal
             animationType = {"slide"}
@@ -49,6 +197,26 @@ export default class Anime extends Component {
 
 
           <Text style = {styles.cim} /*Cím */ >{this.state.animedata.anime_leiras}</Text>
+
+          <FlatList
+          data={this.state.dataSource2}
+          renderItem={({item}) => 
+
+          <View style={{borderWidth:1,margin:20,backgroundColor:"#367588",paddingLeft:10,paddingRight:10,borderRadius:10}}>
+
+         
+          <Text style={styles.cim}>{item.uzenet_szoveg}</Text>
+          <Text style={styles.cim}>{item.uzenet_nev}</Text>
+          
+     
+   
+        </View>
+        
+        }
+    
+          keyExtractor={({uzenet_id}, index) => uzenet_id}
+        />
+
           </View>
           <View style = {styles.container2}>
               <Text //Bezáró Gomb
@@ -62,12 +230,15 @@ export default class Anime extends Component {
           <FlatList
           data={this.state.dataSource}
           renderItem={({item}) => 
-          <View>
-          <Image source={{uri:'http://192.168.1.112:3000/'+item.anime_kep}} style={{width:300,height:300,marginLeft:"auto",marginRight:"auto"}} />
+          <View style={{borderWidth:5,borderColor:"#0fb0fb",borderRadius:10, margin:20,backgroundColor:"lightgray"}}>
+          <Image resizeMode='contain' source={{uri:'http://192.168.2.118:3000/'+item.anime_kep}} style={{width:300,height:300,marginLeft:"auto",marginRight:"auto"}} />
           <TouchableOpacity
               style={styles.button}
               onPress={() => {
-              this.displayModal(true); this.setState({animedata:item})}}>
+              this.displayModal(true); 
+              this.setState({animedata:item})
+              this.hivas(item.anime_id);
+              }}>
               <Text style={styles.buttonText}>{item.anime_cim}</Text>
           </TouchableOpacity>
           </View>          
@@ -98,7 +269,6 @@ const styles = StyleSheet.create({
     shadowColor: '#fff',
     shadowOpacity: 0.5,
     padding:20,
-    marginBottom:10,
     shadowOffset: { 
       height: 10, 
       width: 0 
@@ -157,5 +327,19 @@ const styles = StyleSheet.create({
     color: '#00479e',
     marginTop:100,
     textAlign: 'center',
+  },
+  gombSzoveg:{
+    textAlign:'center',
+    color:'white',
+    marginTop:'auto',
+    marginBottom:'auto',
+    fontSize:25,
+  },
+  gomb:{
+    height:45,
+    backgroundColor:'#0fb0fb',
+    width:'45%',
+    alignSelf:'center',
+    borderRadius:5
   }
 });
