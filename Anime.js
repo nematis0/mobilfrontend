@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image,  Modal, FlatList} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity,Dimensions, Image,  Modal, FlatList,ScrollView} from 'react-native';
+
+var screenWidth = Dimensions.get('window').width;
 
 export default class Anime extends Component {
   constructor(props) {
@@ -8,7 +10,7 @@ export default class Anime extends Component {
   }
 
   componentDidMount(){
-    return fetch('http://192.168.2.118:3000/Animek')
+    return fetch('http://192.168.1.112:3000/Animek')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -31,13 +33,13 @@ export default class Anime extends Component {
     this.setState({isVisible: show})
   }
 
-  kereses=async ()=>{
-    alert("helo")
+  kereses=async (tipus)=>{
+    alert(tipus)
     let bemenet={
-      bevitel1:"Action, Adventure, Comedy, Drama, Fantasy, Horror, Mystery, Romance, Sci-Fi, Slice of Life, Sports, Supernatural"
+      bevitel3:tipus
     }
 
-    return fetch('http://192.168.2.118:3000/tipusok',{
+    return fetch('http://192.168.1.112:3000/tipusok',{
       method: "POST",
       body: JSON.stringify(bemenet),
       headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -49,10 +51,8 @@ export default class Anime extends Component {
 
       this.setState({
         isLoading: false,
-        dataSource2: responseJson,
+        dataSource: responseJson,
       }, function(){
-
-        alert(JSON.stringify(this.state.dataSource2))
       });
 
     })
@@ -69,7 +69,7 @@ export default class Anime extends Component {
       bevitel1:szam
     }
 
-    return fetch('http://192.168.2.118:3000/animekomment',{
+    return fetch('http://192.168.1.112:3000/animekomment',{
       method: "POST",
       body: JSON.stringify(bemenet),
       headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -97,90 +97,32 @@ export default class Anime extends Component {
     return (
       <View style = { styles.container }>
 
-          <TouchableOpacity style={{padding:10}}
-          onPress={async ()=>this.kereses()}>
-          <View style={styles.gomb}>
-          <Text style={styles.gombSzoveg}>Action</Text>
+
+      <View style = {styles.ButtonViewContainer}>
+
+
+    <ScrollView
+        horizontal={true}
+        pagingEnabled={true}
+        showsHorizontalScrollIndicator={false}
+        ref={(node) => this.scroll = node}
+    >
+          <TouchableOpacity style={styles.ButtonContainer}
+          onPress={async ()=>this.kereses("Action")}>
+          <View style={styles.ScrollContainer}>
+          <Text style={styles.ScrollTextContainer}>Action</Text>
           </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={{padding:10}}
-          onPress={async ()=>this.kereses()}>
-          <View style={styles.gomb}>
-          <Text style={styles.gombSzoveg}>Adventure</Text>
+          <TouchableOpacity style={styles.ButtonContainer}
+          onPress={async ()=>this.kereses("Comedy")}>
+          <View style={styles.ScrollContainer}>
+          <Text style={styles.ScrollTextContainer}>Comedy</Text>
           </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={{padding:10}}
-          onPress={async ()=>this.kereses()}>
-          <View style={styles.gomb}>
-          <Text style={styles.gombSzoveg}>Comedy</Text>
-          </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{padding:10}}
-          onPress={async ()=>this.kereses()}>
-          <View style={styles.gomb}>
-          <Text style={styles.gombSzoveg}>Drama</Text>
-          </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{padding:10}}
-          onPress={async ()=>this.kereses()}>
-          <View style={styles.gomb}>
-          <Text style={styles.gombSzoveg}>Fantasy</Text>
-          </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{padding:10}}
-          onPress={async ()=>this.kereses()}>
-          <View style={styles.gomb}>
-          <Text style={styles.gombSzoveg}>Horror</Text>
-          </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{padding:10}}
-          onPress={async ()=>this.kereses()}>
-          <View style={styles.gomb}>
-          <Text style={styles.gombSzoveg}>Mystery</Text>
-          </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{padding:10}}
-          onPress={async ()=>this.kereses()}>
-          <View style={styles.gomb}>
-          <Text style={styles.gombSzoveg}>Romance</Text>
-          </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{padding:10}}
-          onPress={async ()=>this.kereses()}>
-          <View style={styles.gomb}>
-          <Text style={styles.gombSzoveg}>Sci-Fi</Text>
-          </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{padding:10}}
-          onPress={async ()=>this.kereses()}>
-          <View style={styles.gomb}>
-          <Text style={styles.gombSzoveg}>Slice of Life</Text>
-          </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{padding:10}}
-          onPress={async ()=>this.kereses()}>
-          <View style={styles.gomb}>
-          <Text style={styles.gombSzoveg}>Sports</Text>
-          </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{padding:10}}
-          onPress={async ()=>this.kereses()}>
-          <View style={styles.gomb}>
-          <Text style={styles.gombSzoveg}>Supernatural</Text>
-          </View>
-          </TouchableOpacity>
-
+      </ScrollView>
+      </View>
 
         <Modal
             animationType = {"slide"}
@@ -231,7 +173,7 @@ export default class Anime extends Component {
           data={this.state.dataSource}
           renderItem={({item}) => 
           <View style={{borderWidth:5,borderColor:"#0fb0fb",borderRadius:10, margin:20,backgroundColor:"lightgray"}}>
-          <Image resizeMode='contain' source={{uri:'http://192.168.2.118:3000/'+item.anime_kep}} style={{width:300,height:300,marginLeft:"auto",marginRight:"auto"}} />
+          <Image resizeMode='contain' source={{uri:'http://192.168.1.112:3000/'+item.anime_kep}} style={{width:300,height:300,marginLeft:"auto",marginRight:"auto"}} />
           <TouchableOpacity
               style={styles.button}
               onPress={() => {
@@ -341,5 +283,31 @@ const styles = StyleSheet.create({
     width:'45%',
     alignSelf:'center',
     borderRadius:5
-  }
+  },
+  ButtonViewContainer: {
+    flexDirection: 'row',
+    paddingTop: 0,
+  },
+  ButtonContainer: {
+    padding: 5,
+  },
+  ScrollContainer: {
+    flexGrow: 1,
+    marginTop: 0,
+    width: screenWidth/2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height:45,
+    backgroundColor:'#0fb0fb',
+    alignSelf:'center',
+    borderRadius:5
+  },
+  ScrollTextContainer: {
+    fontSize: 20,
+    textAlign:'center',
+    color:'white',
+    marginTop:'auto',
+    marginBottom:'auto',
+    fontSize:25,
+  },
 });
