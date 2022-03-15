@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Anime from './Anime';
 import Kereses from './Kereses';
 import Fooldal from './Fooldal';
-//import SearchField from "react-search-field";
+import Nevjegy from './Nevjegy';
 
 
 function Fooldallap({ navigation }) {
@@ -26,6 +26,12 @@ function Kereseslap({ navigation }) {
   );
 }
 
+function Nevjegylap({ navigation }) {
+  return (
+    <Nevjegy/>
+  );
+}
+
 
 const Drawer = createDrawerNavigator();
 
@@ -36,6 +42,7 @@ export default function App() {
       <Drawer.Screen name="Főoldal" component={Fooldallap} />
         <Drawer.Screen name="Anime" component={Animelap} />
         <Drawer.Screen name="Anime keresés" component={Kereseslap} />
+        <Drawer.Screen name="Névjegy" component={Nevjegylap} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

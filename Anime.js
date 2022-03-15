@@ -10,7 +10,7 @@ export default class Anime extends Component {
   }
 
   componentDidMount(){
-    return fetch('http://192.168.1.112:3000/Animek')
+    return fetch('http://192.168.1.71:3000/Animek')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -34,12 +34,12 @@ export default class Anime extends Component {
   }
 
   kereses=async (tipus)=>{
-    alert(tipus)
+    //alert(tipus)
     let bemenet={
       bevitel3:tipus
     }
 
-    return fetch('http://192.168.1.112:3000/tipusok',{
+    return fetch('http://192.168.1.71:3000/tipusok',{
       method: "POST",
       body: JSON.stringify(bemenet),
       headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -69,7 +69,7 @@ export default class Anime extends Component {
       bevitel1:szam
     }
 
-    return fetch('http://192.168.1.112:3000/animekomment',{
+    return fetch('http://192.168.1.71:3000/animekomment',{
       method: "POST",
       body: JSON.stringify(bemenet),
       headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -115,9 +115,79 @@ export default class Anime extends Component {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.ButtonContainer}
+          onPress={async ()=>this.kereses("Adventure")}>
+          <View style={styles.ScrollContainer}>
+          <Text style={styles.ScrollTextContainer}>Adventure</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.ButtonContainer}
+          onPress={async ()=>this.kereses("Drama")}>
+          <View style={styles.ScrollContainer}>
+          <Text style={styles.ScrollTextContainer}>Drama</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.ButtonContainer}
           onPress={async ()=>this.kereses("Comedy")}>
           <View style={styles.ScrollContainer}>
           <Text style={styles.ScrollTextContainer}>Comedy</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.ButtonContainer}
+          onPress={async ()=>this.kereses("Fantasy")}>
+          <View style={styles.ScrollContainer}>
+          <Text style={styles.ScrollTextContainer}>Fantasy</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.ButtonContainer}
+          onPress={async ()=>this.kereses("Horror")}>
+          <View style={styles.ScrollContainer}>
+          <Text style={styles.ScrollTextContainer}>Horror</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.ButtonContainer}
+          onPress={async ()=>this.kereses("Mystery")}>
+          <View style={styles.ScrollContainer}>
+          <Text style={styles.ScrollTextContainer}>Mystery</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.ButtonContainer}
+          onPress={async ()=>this.kereses("Romance")}>
+          <View style={styles.ScrollContainer}>
+          <Text style={styles.ScrollTextContainer}>Romance</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.ButtonContainer}
+          onPress={async ()=>this.kereses("Sci-Fi")}>
+          <View style={styles.ScrollContainer}>
+          <Text style={styles.ScrollTextContainer}>Sci-Fi</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.ButtonContainer}
+          onPress={async ()=>this.kereses("Slice of Life")}>
+          <View style={styles.ScrollContainer}>
+          <Text style={styles.ScrollTextContainer}>Slice of Life</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.ButtonContainer}
+          onPress={async ()=>this.kereses("Sports")}>
+          <View style={styles.ScrollContainer}>
+          <Text style={styles.ScrollTextContainer}>Sports</Text>
+          </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.ButtonContainer}
+          onPress={async ()=>this.kereses("Supernatural")}>
+          <View style={styles.ScrollContainer}>
+          <Text style={styles.ScrollTextContainer}>Supernatural</Text>
           </View>
           </TouchableOpacity>
 
@@ -173,7 +243,7 @@ export default class Anime extends Component {
           data={this.state.dataSource}
           renderItem={({item}) => 
           <View style={{borderWidth:5,borderColor:"#0fb0fb",borderRadius:10, margin:20,backgroundColor:"lightgray"}}>
-          <Image resizeMode='contain' source={{uri:'http://192.168.1.112:3000/'+item.anime_kep}} style={{width:300,height:300,marginLeft:"auto",marginRight:"auto"}} />
+          <Image resizeMode='contain' source={{uri:'http://192.168.1.71:3000/'+item.anime_kep}} style={{width:300,height:300,marginLeft:"auto",marginRight:"auto"}} />
           <TouchableOpacity
               style={styles.button}
               onPress={() => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TextInput, View, div, FlatList  } from 'react-native';
+import { ImageBackground, Text } from 'react-native';
 
 export default class Fooldal extends Component {
   constructor(props) {
@@ -9,7 +9,13 @@ export default class Fooldal extends Component {
 
   render() {
     return (
-      <Text>Főoldal</Text>
+      <ImageBackground source={require("./bg.jpg")}
+      style={{
+      flex: 1,
+      width: null,
+      height: null,}}>
+      
+    </ImageBackground>
     );
   }
 }
