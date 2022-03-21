@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet,Text, TextInput, View,TouchableOpacity,FlatList,Image } from 'react-native';
+const IP = require('./ipcim.js');
 
 export default class Kereses extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ kereses=async ()=>{
       bevitel4:this.state.nev
      
     }
-return fetch('http://192.168.1.71:3000/kereses', {
+return fetch('http://'+IP.ipcim+'/kereses', {
   method: "POST",
   body: JSON.stringify(bemenet),
   headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -79,7 +80,7 @@ return fetch('http://192.168.1.71:3000/kereses', {
       /*<View style={{ border: "solid blue",width:600, marginLeft:"auto",marginRight:"auto",padding:20,marginBottom:10,borderRadius:20,}}>*/
       <View style={{borderWidth:5,borderColor:"#0fb0fb",borderRadius:10, margin:20,backgroundColor:"lightgray"}}>
       <Text style={{color:"black",fontSize:40,textAlign:"center",marginTop:15,marginBottom:5,fontWeight:"bold" }}   >{item.anime_cim} </Text>
-      <Image  source={{uri: 'http://192.168.1.71:3000/'+item.anime_kep}} style={{width:300,height:300,marginLeft:"auto",marginRight:"auto"}} />  
+      <Image  source={{uri: 'http://'+IP.ipcim+'/'+item.anime_kep}} style={{width:300,height:300,marginLeft:"auto",marginRight:"auto"}} />  
       <Text style={{color:"white",fontSize:16,textAlign:"center",marginTop:15,marginBottom:5,textAlign:"justify"}}   >{item.anime_leiras} </Text>
       </View>
     }

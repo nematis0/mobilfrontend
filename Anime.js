@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity,Dimensions, Image,  Modal, FlatList,ScrollView} from 'react-native';
+const IP = require('./ipcim.js');
 
 var screenWidth = Dimensions.get('window').width;
 
@@ -10,7 +11,7 @@ export default class Anime extends Component {
   }
 
   componentDidMount(){
-    return fetch('http://192.168.1.71:3000/Animek')
+    return fetch('http://'+IP.ipcim+'/Animek')
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -39,7 +40,7 @@ export default class Anime extends Component {
       bevitel3:tipus
     }
 
-    return fetch('http://192.168.1.71:3000/tipusok',{
+    return fetch('http://'+IP.ipcim+'/tipusok',{
       method: "POST",
       body: JSON.stringify(bemenet),
       headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -69,7 +70,7 @@ export default class Anime extends Component {
       bevitel1:szam
     }
 
-    return fetch('http://192.168.1.71:3000/animekomment',{
+    return fetch('http://'+IP.ipcim+'/animekomment',{
       method: "POST",
       body: JSON.stringify(bemenet),
       headers: {"Content-type": "application/json; charset=UTF-8"}
@@ -243,7 +244,7 @@ export default class Anime extends Component {
           data={this.state.dataSource}
           renderItem={({item}) => 
           <View style={{borderWidth:5,borderColor:"#0fb0fb",borderRadius:10, margin:20,backgroundColor:"lightgray"}}>
-          <Image resizeMode='contain' source={{uri:'http://192.168.1.71:3000/'+item.anime_kep}} style={{width:300,height:300,marginLeft:"auto",marginRight:"auto"}} />
+          <Image resizeMode='contain' source={{uri:'http://'+IP.ipcim+'/'+item.anime_kep}} style={{width:300,height:300,marginLeft:"auto",marginRight:"auto"}} />
           <TouchableOpacity
               style={styles.button}
               onPress={() => {
