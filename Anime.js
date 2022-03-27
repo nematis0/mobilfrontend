@@ -209,26 +209,8 @@ export default class Anime extends Component {
           <Text style = {styles.cim} /*Cím */ >{this.state.animedata.anime_cim}</Text>
 
 
-          <Text style = {styles.cim} /*Cím */ >{this.state.animedata.anime_leiras}</Text>
+          <Text style = {styles.modal2} /*Cím */ >{this.state.animedata.anime_leiras}</Text>
 
-          <FlatList
-          data={this.state.dataSource2}
-          renderItem={({item}) => 
-
-          <View style={{borderWidth:1,margin:20,backgroundColor:"#367588",paddingLeft:10,paddingRight:10,borderRadius:10}}>
-
-         
-          <Text style={styles.cim}>{item.uzenet_szoveg}</Text>
-          <Text style={styles.cim}>{item.uzenet_nev}</Text>
-          
-     
-   
-        </View>
-        
-        }
-    
-          keyExtractor={({uzenet_id}, index) => uzenet_id}
-        />
 
           </View>
           <View style = {styles.container2}>
@@ -306,6 +288,14 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#FFFFFF',
     fontSize: 22,
+  },
+  modal2: {
+    fontSize: 24,
+    color: '#00479e',
+    marginTop:25,
+    textAlign: 'center',
+    padding: 100,
+    paddingTop: 15,
   },
   image: {
     marginTop: 150,
