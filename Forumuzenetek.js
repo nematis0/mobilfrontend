@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList} from 'react-native-web';
+import {Text, View, FlatList} from 'react-native';
 const IP = require('./ipcim.js');
 
 export default class Forumuzenet extends Component {
@@ -58,20 +58,3 @@ export default class Forumuzenet extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  gombSzoveg:{
-    textAlign:'center',
-    color:'white',
-    marginTop:'auto',
-    marginBottom:'auto',
-    fontSize:25
-},
-gomb:{
-    height:45,
-    backgroundColor:'#0fb0fb',
-    width:'45%',
-    alignSelf:'center',
-    borderRadius:10
-    },
-});

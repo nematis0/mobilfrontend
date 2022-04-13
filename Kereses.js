@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet,Text, TextInput, View,TouchableOpacity,FlatList,Image } from 'react-native-web';
+import { StyleSheet,Text, TextInput, View,TouchableOpacity,FlatList,Image } from 'react-native';
 const IP = require('./ipcim.js');
 
 export default class Kereses extends Component {
